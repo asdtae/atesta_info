@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Osztály Diákjai</title>
+</head>
+<body>
+<h1>Válassz osztályt</h1>
+<form id="classForm">
+  <label for="class_id">Osztály:</label>
+  <select id="class_id" name="class_id">
+    <option value="1">A</option>
+    <option value="1">B</option>
+    <option value="1">C</option>
+    <option value="1">D</option>
+    <option value="1">E</option>
+    <option value="1">F</option>
+    <option value="1">G</option>
+  </select>
+  <button type="submit">Küldés</button>
+</form>
+
+<h2>Diákok listája</h2>
+<ul id="studentsList"></ul>
+
+<script>
+  document.getElementById('classForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const classId = document.getElementById('class_id').value;
+
+    fetch('get_students.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: class_id=${classId},
+    })
+            .then(response => response.json())
+            .then(data => {
+              const studentsList = document.getElementById('studentsList');
+              studentsList.innerHTML = '';
+
+              if (data.error) {
+                studentsList.innerHTML = <li>${data.error}</li>;
+              } else {
+                data.forEach(student => {
+                  studentsList.innerHTML += <li>${student}</li>;
+                });
+              }
+            });
+  });
+</script>
+</body>
+</html>
