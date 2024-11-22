@@ -1,0 +1,31 @@
+body
+{
+    text-align: center;
+    background-color: #f3ffe1;
+}
+table
+{
+    margin: 0 auto;
+    width: 25%;
+    background-color: #E8D7FF;
+    border-radius: 15px;
+}
+
+.cim {
+    color: #2C514C;
+    text-align: center;
+}
+
+.text {
+    color: #D35269;
+}
+
+a:link {
+    color: cornflowerblue;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+#rounded {
+
+}

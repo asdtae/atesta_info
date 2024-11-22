@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>C++ Code</title>
+    <meta charset="UTF-8">
+    <style>
+      body
+      {
+        text-align: center;
+        background-color: #f3ffe1;
+      }
+      table
+      {
+        margin: 0 auto;
+        width: 85%;
+        background-color: #E8D7FF;
+        border-radius: 15px;
+      }
+      code {
+        font-family: monospace;
+        text-align: left;
+      }
+    </style>
+</head>
+<body>
+    <table>
+      <tr>
+        <th colspan="2"><h5 class="text">Code</h5></th>
+      </tr>
+      <tr>
+        <th>
+          <code>
+            void INSERT_INTO_erets2_(int LO, int HI, int loopN)
+            {
+              int r_int, n=10;
+              char cch, nev[11];
+
+              int anya_szam,jegy1,jegy2,jegy3,jegy4,atlag;
+              int mem1, mem2;
+              string osztaly;
+
+              srand (static_cast < unsigned> (time(0)));
+              for(int i=0; i<=loopN; i++)
+              {
+                // [anyaszam]
+                anya_szam=i;
+
+                // [Nev]
+                string nev;
+                vector< string> firstNames = {"John", "Jane", "Alex", "Emily", "Chris", "Katie"};
+                vector< string> lastNames = {"Smith", "Doe", "Brown", "Johnson", "Williams", "Jones"};
+                string firstName = getRandomName(firstNames);
+                string lastName = getRandomName(lastNames);
+                nev= "'" + firstName + ' ' + lastName;
+
+                // [osztaly]
+                string osztaly;
+                int num = rand()%12+4;
+
+                if(num<12) osztaly+=to_string(num);
+                else osztaly+=to_string(12);
+                osztaly += 'A' + rand()%7;
+                osztaly += "'";
+
+                // [jegyek]
+                LO=1; HI=11;
+                float r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+                if(r3>10)r3=10;
+                jegy1=r3;/*
+
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+                if(r3>10)r3=10;
+                jegy2=r3;
+
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+                if(r3>10)r3=10;
+                jegy3=r3;
+
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+                if(r3>10)r3=10;
+                jegy4=r3;
+
+                atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;
+                */
+                cout << "INSERT INTO `test`(`osztaly`, `nev`, `jegy`) VALUES ('"
+                //<< anya_szam <<", "
+                << osztaly <<", "
+                << nev <<"' ,"
+                << jegy1  /*<<", "
+                << jegy2  <<", "
+                << jegy3  <<", "
+                << jegy4  <<", "
+                << atlag*/
+                << ");" << endl;
+              }
+            }
+
+            int main()
+            {
+              char x[100]="osztaly.nev.jegy";
+              INSERT_INTO_erets2_(4,11, 20);
+              //INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");
+              //cycle(3,x);
+            }
+          </code>
+        </th>
+      </tr>
+      <tr>
+        <th><h5 class="text">Back</h5></th>
+        <th><a href=index.html>linke</a></th>
+      </tr>
+    </table>
+
+
+</body>
+</html>
