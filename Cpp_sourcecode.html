@@ -55,12 +55,17 @@
 
                 // [osztaly]
                 string osztaly;
-                int num = rand()%12+4;
 
-                if(num<12) osztaly+=to_string(num);
-                else osztaly+=to_string(12);
                 osztaly += 'A' + rand()%7;
                 osztaly += "'";
+
+                // [evfoly]
+                string evfoly;
+                int num = rand()%12+4;
+
+                if(num<12) evfoly+=to_string(num);
+                else evfoly+=to_string(12);
+                evfoly += "'";
 
                 // [jegyek]
                 LO=1; HI=11;
@@ -86,8 +91,9 @@
 
                 atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;
                 */
-                cout << "INSERT INTO `test`(`osztaly`, `nev`, `jegy`) VALUES ('"
+                cout << "INSERT INTO `test`(`evfoly`, `osztaly`, `nev`, `jegy`) VALUES ('"
                 //<< anya_szam <<", "
+                << evfoly <<", '"
                 << osztaly <<", "
                 << nev <<"' ,"
                 << jegy1  /*<<", "
