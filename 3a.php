@@ -1,23 +1,41 @@
 <?php
-
-	$conn = mysqli_connect("localhost","root","","12b19a");
-	$parancs="select osztaly,nev from test order by osztaly, nev";
-	
-	$eredmeny = mysqli_query($conn, $parancs);
-	
-	echo "<table border='1'>
+$conn=mysqli_connect("localhost","root","","12b19a");
+$parancs="select * from erettsegi order by atlag desc";
+$eredmeny=mysqli_query($conn,$parancs);
+echo "<table border='1'>
             <tr>
-                <th>Osztaly</th>
+                <th>ID</th>
                 <th>Nev</th>
+                <th>Osztaly</th>
+                <th>Matek</th>
+                <th>Info</th>
+                <th>Roman</th>
+                <th>Magyar</th>
+				<th>Atlag</th>
             </tr>";
-	
-	while ($sor=mysqli_fetch_assoc($eredmeny))
-	{
-		echo "<tr>
-                <td>" . $sor["osztaly"] . "</td>
-                <td>" . $sor["nev"] . "</td>
+    
+    while ($sor=mysqli_fetch_assoc($eredmeny)) {
+        echo "<tr>
+                <td>";
+				echo $sor["anyakonyv_sz"] . "</td>
+                <td>";
+				echo($sor["nev"]) . "</td>
+                <td>";
+				echo $sor["osztaly"] . "</td>
+                <td>";
+				echo $sor["matematika"] . "</td>
+                <td>";
+				echo $sor["informatika"] . "</td>
+                <td>";
+				echo $sor["roman"] . "</td>
+                <td>";
+				echo $sor["magyar"] . "</td>
+				<td>";
+				echo $sor["atlag"] . "</td>
               </tr>";
-	}
-	mysqli_close($conn);
+    }
+   
+    echo "</table>";
 
+mysqli_close($conn);
 ?>

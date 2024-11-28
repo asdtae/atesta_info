@@ -6,7 +6,7 @@
     <style>
       body
       {
-        text-align: center;
+        text-align: left;
         background-color: #f3ffe1;
       }
       table
@@ -16,7 +16,7 @@
         background-color: #E8D7FF;
         border-radius: 15px;
       }
-      code {
+      .code {
         font-family: monospace;
         text-align: left;
       }
@@ -29,89 +29,89 @@
       </tr>
       <tr>
         <th>
-          <code>
-            void INSERT_INTO_erets2_(int LO, int HI, int loopN)
-            {
-              int r_int, n=10;
-              char cch, nev[11];
-
-              int anya_szam,jegy1,jegy2,jegy3,jegy4,atlag;
-              int mem1, mem2;
-              string osztaly;
-
-              srand (static_cast < unsigned> (time(0)));
+          <code class="code">
+            void INSERT_INTO_erets2_(int LO, int HI, int loopN)<br>
+            {<br>
+              int r_int, n=10;<br>
+              char cch, nev[11];<br>
+<br>
+              int anya_szam,jegy1,jegy2,jegy3,jegy4,atlag;<br>
+              int mem1, mem2;<br>
+              string osztaly;<br>
+<br>
+              srand (static_cast < unsigned> (time(0)));<br>
               for(int i=0; i<=loopN; i++)
-              {
-                // [anyaszam]
-                anya_szam=i;
+              {<br>
+                // [anyaszam]<br>
+                anya_szam=i;<br>
+<br>
+                // [Nev]<br>
+                string nev;<br>
+                vector< string> firstNames = {"John", "Jane", "Alex", "Emily", "Chris", "Katie"};<br>
+                vector< string> lastNames = {"Smith", "Doe", "Brown", "Johnson", "Williams", "Jones"};<br>
+                string firstName = getRandomName(firstNames);<br>
+                string lastName = getRandomName(lastNames);<br>
+                nev= "'" + firstName + ' ' + lastName;<br>
+<br>
+                // [osztaly]<br>
+                string osztaly;<br>
+<br>
+                osztaly += 'A' + rand()%7;<br>
+                osztaly += "'";<br>
+<br>
+                // [evfoly]<br>
+                string evfoly;<br>
+                int num = rand()%12+4;<br>
+<br>
+                if(num<12) evfoly+=to_string(num);<br>
+                else evfoly+=to_string(12);<br>
+                evfoly += "'";<br>
+<br>
+                // [jegyek]<br>
+                LO=1; HI=11;<br>
+                float r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+                if(r3>10)r3=10;<br>
+                jegy1=r3;/*<br>
 
-                // [Nev]
-                string nev;
-                vector< string> firstNames = {"John", "Jane", "Alex", "Emily", "Chris", "Katie"};
-                vector< string> lastNames = {"Smith", "Doe", "Brown", "Johnson", "Williams", "Jones"};
-                string firstName = getRandomName(firstNames);
-                string lastName = getRandomName(lastNames);
-                nev= "'" + firstName + ' ' + lastName;
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+                if(r3>10)r3=10;<br>
+                jegy2=r3;<br>
 
-                // [osztaly]
-                string osztaly;
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+                if(r3>10)r3=10;<br>
+                jegy3=r3;<br>
 
-                osztaly += 'A' + rand()%7;
-                osztaly += "'";
+                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+                if(r3>10)r3=10;<br>
+                jegy4=r3;<br>
 
-                // [evfoly]
-                string evfoly;
-                int num = rand()%12+4;
-
-                if(num<12) evfoly+=to_string(num);
-                else evfoly+=to_string(12);
-                evfoly += "'";
-
-                // [jegyek]
-                LO=1; HI=11;
-                float r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
-                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
-                if(r3>10)r3=10;
-                jegy1=r3;/*
-
-                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
-                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
-                if(r3>10)r3=10;
-                jegy2=r3;
-
-                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
-                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
-                if(r3>10)r3=10;
-                jegy3=r3;
-
-                r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
-                r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
-                if(r3>10)r3=10;
-                jegy4=r3;
-
-                atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;
-                */
-                cout << "INSERT INTO `test`(`evfoly`, `osztaly`, `nev`, `jegy`) VALUES ('"
-                //<< anya_szam <<", "
-                << evfoly <<", '"
-                << osztaly <<", "
-                << nev <<"' ,"
-                << jegy1  /*<<", "
-                << jegy2  <<", "
-                << jegy3  <<", "
-                << jegy4  <<", "
-                << atlag*/
-                << ");" << endl;
-              }
-            }
-
-            int main()
-            {
-              char x[100]="osztaly.nev.jegy";
-              INSERT_INTO_erets2_(4,11, 20);
-              //INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");
-              //cycle(3,x);
-            }
+                atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;<br>
+                */<br>
+                cout << "INSERT INTO `test`(`evfoly`, `osztaly`, `nev`, `jegy`) VALUES ('"<br>
+                //<< anya_szam <<", "<br>
+                << evfoly <<", '"<br>
+                << osztaly <<", "<br>
+                << nev <<"' ,"<br>
+                << jegy1  /*<<", "<br>
+                << jegy2  <<", "<br>
+                << jegy3  <<", "<br>
+                << jegy4  <<", "<br>
+                << atlag*/<br>
+                << ");" << endl;<br>
+              }<br>
+            }<br>
+<br>
+            int main()<br>
+            {<br>
+              char x[100]="osztaly.nev.jegy";<br>
+              INSERT_INTO_erets2_(4,11, 20);<br>
+              //INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");<br>
+              //cycle(3,x);<br>
+            }<br>
           </code>
         </th>
       </tr>
