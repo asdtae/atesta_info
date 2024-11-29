@@ -76,9 +76,9 @@
                 string evfoly;<br>
                 int num = rand()%12+4;<br>
 <br>
-                if(num<12) evfoly+=to_string(num);<br>
-                else evfoly+=to_string(12);<br>
-                evfoly += "'";<br>
+                if(num<12 && num> 10) evfoly+=to_string(num);<br>
+				else if(num<10) evfoly+= '0' + to_string(num);<br>
+				else evfoly+=to_string(12);<br>
 <br>
                 // [jegyek]<br>
                 LO=1; HI=11;<br>
@@ -193,6 +193,7 @@
 			INSERT_INTO_erets3_(6,4,11,10);<br>
 			//INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");<br>
 			//cycle(3,x);<br>
+			cout << "UPDATE eret SET `atlag` = (`matematika` + `informatika` + `roman` + `magyar`) / 4" << endl;<br>
 			}<br>
           </code>
         </th>
