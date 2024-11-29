@@ -30,6 +30,19 @@
       <tr>
         <th>
           <code class="code">
+		  #include < iostream><br>
+			#include < string><br>
+			#include < cstdlib><br>
+			#include < ctime><br>
+			<br>
+			using namespace std:<br>
+			<br>
+			std::string getRandomName(const std::vector< std::string>& names) {<br>
+				if (names.empty()) return "";<br>
+				int randomIndex = rand() % names.size();<br>
+				return names[randomIndex];<br>
+			}<br>
+			<br>
             void INSERT_INTO_erets2_(int LO, int HI, int loopN)<br>
             {<br>
               int r_int, n=10;<br>
@@ -104,14 +117,83 @@
                 << ");" << endl;<br>
               }<br>
             }<br>
+<br><br>
+            void INSERT_INTO_erets3_(int anyaszamstart, int LO, int HI, int loopN)<br>
+			{<br>
+			int r_int, n=10;<br>
+			char cch, nev[11];<br>
 <br>
-            int main()<br>
-            {<br>
-              char x[100]="osztaly.nev.jegy";<br>
-              INSERT_INTO_erets2_(4,11, 20);<br>
-              //INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");<br>
-              //cycle(3,x);<br>
-            }<br>
+			loopN += anyaszamstart;<br>
+<br>
+			int anya_szam,jegy1,jegy2,jegy3,jegy4,atlag;<br>
+			int mem1, mem2;<br>
+			string osztaly;<br>
+<br>
+			srand (static_cast < unsigned> (time(0)));<br>
+			for(int i=anyaszamstart; i<=loopN; i++) { <br>
+			// [anyaszam]<br>
+			anya_szam=i;<br>
+<br>
+			// [Nev]<br>
+			string nev;<br>
+			vector< string> firstNames = {"John", "Jane", "Alex", "Emily", "Chris", "Katie", "Alice", "Bob", "Charlie", "Diana", "Eve"};<br>
+			vector< string> lastNames = {"Smith", "Doe", "Brown", "Johnson", "Williams", "Jones"};<br>
+			string firstName = getRandomName(firstNames);<br>
+			string lastName = getRandomName(lastNames);<br>
+			nev= "'" + firstName + ' ' + lastName;<br>
+<br>
+			// [osztaly]<br>
+			string osztaly;<br>
+<br>
+			osztaly += 'A' + rand()%7;<br>
+			osztaly += "'";<br>
+<br>
+			// [evfoly]<br>
+			string evfoly;<br>
+			int num = rand()%12+4;<br>
+<br>
+			if(num<12) evfoly+=to_string(num);<br>
+			else evfoly+=to_string(12);<br>
+<br>
+			// [jegyek]<br>
+			LO=1; HI=11;<br>
+			float r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+			r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+			if(r3>10)r3=10;<br>
+			jegy1=r3;<br>
+			r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+			r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+			if(r3>10)r3=10;<br>
+			jegy2=r3;<br>
+			r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));<br>
+			r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+			if(r3>10)r3=10;<br>
+			jegy3=r3;<br>
+			r3 = LO + static_cast < float> (rand()) /( static_cast < float> (RAND_MAX/(HI-LO)));
+			r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;<br>
+			if(r3>10)r3=10;<br>
+			jegy4=r3;<br>
+			atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;<br>
+<br>
+			cout <<" INSERT INTO `erettsegi`(`anyakonyv_sz`, `nev`, `osztaly`, `matematika`, `informatika`, `roman`, `magyar`) VALUES ("<br>
+			<< anya_szam <<", "<br>
+			<< nev <<"' , '"<br>
+			<< evfoly << osztaly <<" ,"<br>
+			<< jegy1 <<", "<br>
+			<< jegy2 <<", "<br>
+			<< jegy3 <<", "<br>
+			<< jegy4 <<", "<br>
+			<< ");" << endl;<br>
+			}<br>
+			}<br>
+<br>
+			int main()<br>
+			{<br>
+			char x[100]="osztaly.nev.jegy";<br>
+			INSERT_INTO_erets3_(6,4,11,10);<br>
+			//INSERT_INTO_constr(4,2,10,15,"`test_table`(nev, eletkor, evfolyam)");<br>
+			//cycle(3,x);<br>
+			}<br>
           </code>
         </th>
       </tr>
