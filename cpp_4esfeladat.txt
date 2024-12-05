@@ -1,0 +1,96 @@
+#include <iostream>
+#include <cstring>
+#include <cstdlib>
+#include <ctime>
+#include <vector>
+#include <iomanip>
+
+using namespace std;
+
+string getRandomName(const vector<string>& names) {
+    return names[rand() % names.size()];
+}
+
+void bd_atestat_DIAK(int start_i, int numb_of_it)
+{
+    srand (static_cast <unsigned> (time(0)));
+    numb_of_it -= start_i;
+
+    for(int i=start_i; i<=numb_of_it; i++)
+    {
+        // [Anyaszam]
+        int anya_szam;
+        anya_szam=i;
+
+        // [Nev]
+        string nev;
+        vector<string> firstNames = {"John", "Jane", "Alex", "Emily", "Chris", "Katie"};
+        vector<string> lastNames = {"Smith", "Doe", "Brown", "Johnson", "Williams", "Jones"};
+        string firstName = getRandomName(firstNames);
+        string lastName = getRandomName(lastNames);
+
+        // [Cim]
+        string cim;
+        vector<string> varosok = {"Budapest", "Debrecen", "Szeged", "Miskolc", "Pecs", "Gyor"};
+        vector<string> utcak = {"Andrassy Ut", "Kossuth Lajos Utca", "Vaci Utca", "Rakoczi Ut", "Margit Korter", "Fo Utca"};
+        int utszam = rand()%2500+1;
+        string Svarosok = getRandomName(varosok);
+        string Sutcak = getRandomName(utcak);
+        cim = Svarosok + ' ' + Sutcak + ' ' + to_string(utszam);
+
+        // [Osztaly]
+        string osztaly;
+        osztaly += 'A' + rand()%7;
+
+        string evfoly;
+        int num = rand()%12+4;
+        if(num<12) evfoly+=to_string(num);
+        else evfoly+=to_string(12);
+
+        // [Atlag]
+        int LO=1, HI=11, r_int;
+        float jegy1, jegy2, jegy3, jegy4, atlag;
+        float r3 = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+        //r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+        if(r3>10)r3=10;
+        jegy1=r3;
+
+        r3 = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+        //r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+        if(r3>10)r3=10;
+        jegy2=r3;
+
+        r3 = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+        //r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+        if(r3>10)r3=10;
+        jegy3=r3;
+
+        r3 = LO + static_cast <float> (rand()) /( static_cast <float> (RAND_MAX/(HI-LO)));
+        //r3 *= 100; r_int= r3; r3 = r_int; r3 /= 100;
+        if(r3>10)r3=10;
+        jegy4=r3;
+
+        atlag = ( jegy1 + jegy2 + jegy3 + jegy4 ) / 4;
+
+        // [Jelzo]
+        bool jelzo = false;
+        int jelzo_randio = rand()%2;
+        if(jelzo_randio == 1) jelzo = true;
+
+
+        cout<<setprecision(3)<<"INSERT INTO `diak4`(`anyakonyv_sz`, `vezeteknev`, `keresztnev`, `cim`, `osztaly`, `atlag`, `jelzo`) VALUES ("
+            <<"'"<<anya_szam<<"' ,"
+            <<"'"<<lastName<<"' ,"
+            <<"'"<<firstName<<"' ,"
+            <<"'"<<cim<<"' ,"
+            <<"'"<<evfoly<<osztaly<<"' ,"
+            <<"'"<<atlag<<"' ,"
+            <<"'"<<jelzo<<"');"
+        <<endl;
+    }
+}
+
+int main()
+{
+    bd_atestat_DIAK(0,500);
+}
