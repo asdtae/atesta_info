@@ -16,6 +16,12 @@ table
     text-align: center;
 }
 
+.form {
+    color: #2C514C;
+    text-align: center;
+    margin-top: 25em;
+}
+
 .text {
     color: #D35269;
 }
