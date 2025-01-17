@@ -57,7 +57,7 @@
 
         $r3 = rand($LO, $HI);
         $jegy4 = min($r3, 10);
-        
+
         $atlag = ($jegy1 + $jegy2 + $jegy3 + $jegy4) / 4;
 
         $jelzo = (rand(0, 1) == 1) ? true : false;

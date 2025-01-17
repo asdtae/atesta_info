@@ -2,17 +2,186 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Da cpp</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Da cpp</title>
     <link rel="stylesheet" type="text/css" href="../splash.css">
+
+    <style>
+        /* Add some styles for the form */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .form label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .form input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+        }
+
+        .form input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        /* Popup styles */
+        #torrent-scanner-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .popup-content h3 {
+            margin-top: 0;
+        }
+
+        .popup-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .popup-content button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <form action="form.php" method="post" class="form">
-    Oszlopok szama:
-    <label>
-      <input type="text" name="colnumb">
-    </label>
-      <input type="submit">
-  </form>
+
+  <!-- Form to capture the number of columns -->
+  <div class="form-container">
+    <form id="column-form" class="form">
+      <label for="colnumb">Oszlopok szama:</label>
+      <input type="number" name="colnumb" id="colnumb" required min="1">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <!-- Hidden popup -->
+  <div id="torrent-scanner-popup">
+    <div class="popup-content">
+      <h3>Form Submitted!</h3>
+      <p>Your form has been submitted successfully. Processing your request...</p>
+      <button onclick="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    // Show the popup when the form is submitted
+    const form = document.getElementById('column-form');
+    const popup = document.getElementById('torrent-scanner-popup');
+    const colnumbInput = document.getElementById('colnumb');
+    
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        
+        // Show the popup
+        popup.style.display = 'flex';
+        
+        // Fetch the number of columns entered by the user
+        const colnumb = colnumbInput.value;
+
+        // Now, trigger the download process for the PHP file
+        const fileUrl = "https://example.com/somefile.php";  // Replace with the actual URL of the PHP file
+        const fileName = "downloadedFile.php";  // Name to save the file as
+
+        downloadFile(fileUrl, fileName);
+    });
+
+    // Function to download the file
+    function downloadFile(url, fileName) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.blob();  // Convert the response to a Blob
+            })
+            .then(blob => {
+                // Create a temporary download link in the browser
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);  // Create a URL for the Blob
+                link.download = fileName;  // Set the download filename
+
+                // Append the link to the DOM (it's not visible)
+                document.body.appendChild(link);
+
+                // Programmatically trigger a click on the link to start the download
+                link.click();
+
+                // Clean up the link after download
+                document.body.removeChild(link);
+
+                // Optionally, open the downloaded PHP file in a new tab
+                // This assumes the file is saved in the htdocs directory and is served by a local server like XAMPP
+                window.open(`http://localhost/${fileName}`, '_blank');
+            })
+            .catch(error => {
+                console.error('Error downloading the file:', error);
+            });
+    }
+
+    // Function to close the popup
+    function closePopup() {
+        popup.style.display = 'none';
+    }
+  </script>
+
 </body>
 </html>
