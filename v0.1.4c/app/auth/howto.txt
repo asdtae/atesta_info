@@ -1,0 +1,7 @@
+https://stackoverflow.com/questions/59777670/how-can-i-hash-a-string-with-sha256
+
+https://auth0.com/blog/hashing-passwords-one-way-road-to-security/
+
+https://www.w3schools.com/php/php_sessions.asp
+
+https://www.tutorialrepublic.com/php-tutorial/php-mysql-login-system.php
