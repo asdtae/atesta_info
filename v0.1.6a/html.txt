@@ -1,0 +1,14 @@
+<nav class="navbar varela-round-regular">
+        <div class="navbar-left">
+            <a href="index.html" class="website-name">Cycle Sphere</a>
+            <div class="vl"></div>
+            <a href="blog/index.html" class="navbar-link">Blog</a>
+        </div>
+        <div class="navbar-right">
+            <a href="auth/auth.html" class="navbar-link">Log In</a>
+        </div>
+    </nav>
+    <div class="varela-round-regular content">
+        <h1>Újrahasznosítás</h1>
+
+    </div>
