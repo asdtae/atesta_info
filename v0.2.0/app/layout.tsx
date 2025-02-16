@@ -1,10 +1,5 @@
-import { Quicksand } from "next/font/google";
+import { quicksand } from 'ui/fonts';
 import "./globals.css";
-
-const quicksand = Quicksand({
-    subsets: ['latin'],
-    display: 'swap'
-});
 
 export default function RootLayout({
   children,
@@ -14,7 +9,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${quicksand.variable} ${quicksand.variable} antialiased`}
+        className={`${quicksand.variable} antialiased`}
       >
         {children}
       </body>
