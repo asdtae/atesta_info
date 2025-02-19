@@ -1,5 +1,8 @@
-import { quicksand } from 'ui/fonts';
+import Navbar from './ui/navbar'
+import Footer from './ui/footer'
 import "./globals.css";
+import React from "react";
+import { SessionClient } from "./sessionclient.tsx";
 
 export default function RootLayout({
   children,
@@ -8,10 +11,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${quicksand.variable} antialiased`}
-      >
-        {children}
+      <head>
+          <title>Cyclesphere</title>
+      </head>
+      <body>
+        <SessionClient>
+            <Navbar />
+            {children}
+            <Footer />
+        </SessionClient>
       </body>
     </html>
   );

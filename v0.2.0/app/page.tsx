@@ -1,35 +1,33 @@
-import LikeButton from './like-button';
+import Link from "next/link";
+import Lorem from "./lorem";
+import { Quicksand } from 'next/font/google';
 
-/*export default function Home() {
-  return(
-      <div>
-          <h1>Hello</h1>
-          <div id="test">
-              <a>Cyclesphere</a>
-              <a href="./app/page.tsx">App</a>
-              <a>Docs</a>
-              <a>Sign In</a>
-          </div>
-      </div>
-  );
-}*/
-
-function Header({ title }) {
-    return <h1>{title ? title : 'Default title'}</h1>;
-}
+const quicksand_700 = Quicksand({
+    weight: ['700'],
+    subsets: ['latin']
+})
 
 export default function HomePage() {
-    const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
-
     return (
         <div>
-            <Header title="Develop. Preview. Ship." />
-            <ul>
-                {names.map((name) => (
-                    <li key={name}>{name}</li>
-                ))}
-            </ul>
-            <LikeButton />
+            <div className="min-h-screen flex flex-col bg-gradient-to-br
+                 from-[#00A878]  to-[#A57548] relative overflow-hidden">
+                <div className={`${quicksand_700.className} flex flex-col items-center justify-center 
+                     text-center text-white flex-grow px-6`}>
+                    <h1 className={`text-7xl font-bold`}>Welcome to Cyclesphere</h1>
+                    <p className="mt-4 text-lg">Reduce, Reuse, Recycle — For a Cleaner,
+                        <span className="mt-4 text-lg text-[#13ee1c]"> Greener</span> Future!</p>
+
+                    <Link href={"/register"}>
+                        <button className="mt-6 px-6 py-3 bg-[#66B539] text-white text-lg
+                                font-semibold rounded-full shadow-lg hover:bg-[#6D4C41] transition">
+                        Get Started
+                        </button>
+                    </Link>
+                </div>
+            </div>
+            <Lorem />
+            <Lorem />
         </div>
     );
 }

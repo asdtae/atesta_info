@@ -5,17 +5,27 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
+  --linkHover: #ffbf92;
+  --pri1: #4CAF50;
+  --pri2: #0077B6;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --sec1: #FF6F00;
+  --sec2: #6D4C41;
+
+  --neut1: #F1F8E9;
+  --neut2: #374148;
+
+  --green1: #66B539;
+  --green2: #E8F7DD;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-
 }
+
+
+* {
+  scrollbar-width: none;
+}
+
