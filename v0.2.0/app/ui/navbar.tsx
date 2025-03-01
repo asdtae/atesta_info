@@ -21,9 +21,9 @@ export default function Navbar() {
         image?: string;
     } | null>(null);
     const [loading, setLoading] = useState(true);
+    const token = Cookies.get("authToken");
 
     useEffect(() => {
-        const token = Cookies.get("authToken");
         if (token) {
             fetch("../api/me", {
                 headers: { Authorization: `Bearer ${token}` },
@@ -77,7 +77,7 @@ export default function Navbar() {
                         >Sign Out</button>
                     </div>
                 ) : (
-                    <Link href={"/register"} className="hover:text-[#ffbf92]">Sign In</Link>
+                    <Link href={"/register"} className="hover:text-[#ffbf92]">{token}</Link>
                 )}
             </div>
         </nav>
