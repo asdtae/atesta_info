@@ -17,7 +17,15 @@
 
   --green1: #66B539;
   --green2: #E8F7DD;
+
+  --nav-bg: rgba(55, 65, 72, 0.5);
 }
+
+.backdrop-composite {
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}S
 
 body {
   color: var(--foreground);

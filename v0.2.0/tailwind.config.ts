@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      backgroundColor: {
+        'nav': 'var(--nav-bg)',
+        'dropdown': 'var(--dropdown-bg)'
+      }
     },
   },
   plugins: [],

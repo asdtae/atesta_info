@@ -4,6 +4,14 @@ import "./globals.css";
 import React from "react";
 import { SessionClient } from "./sessionclient.tsx";
 
+export const metadata = {
+    title: 'Cyclesphere',
+    description: 'Your cycling community platform',
+    icons: {
+        icon: '/favicon.ico',
+    },
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -11,9 +19,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-          <title>Cyclesphere</title>
-      </head>
       <body>
         <SessionClient>
             <Navbar />
