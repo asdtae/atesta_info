@@ -20,42 +20,33 @@ export default function Navbar() {
         name: string;
         image?: string;
     } | null>(null);
-
     const [loading, setLoading] = useState(true);
-    const token = Cookies.get("authToken");
-
-    var signInText = "Sign In";
-    if (token) { signInText = token; }
 
     useEffect(() => {
-        fetch('../api/me', {
-            headers: {}
-        })
-    }, []);
-    /*
-    useEffect(() => {
-        if (token) {
-            fetch("../api/me", {
+        const token = Cookies.get("authToken");
+
+        if(token){
+            fetch('../api/me', {
                 headers: { Authorization: `Bearer ${token}` },
             })
                 .then((res) => {
                     if (!res.ok) throw new Error("Failed to fetch user");
                     return res.json();
                 })
-                .then((data) => {
-                    setUser(data.user);
-                })
-                .catch((err) => {
-                    console.error(err);
-                    setUser(null);
-                })
-                .finally(() => {
-                    setLoading(false);
-                });
+                .then((data) => setUser(data.user))
+                .catch(() => setUser(null))
+                .finally(() => setLoading(false));
         } else {
+            setUser(null);
             setLoading(false);
         }
-    }, []);*/
+    }, []);
+
+    const handleLogout = () => {
+        Cookies.remove("authToken");
+        setUser(null);
+        window.location.href = "/";
+    };
 
     return (
         <nav className={`${quicksand_600.className} fixed top-0 left-0 w-full
@@ -68,26 +59,26 @@ export default function Navbar() {
                 <Link href={"../about"} className="hover:text-[#ffbf92]">About</Link>
                 <Link href={"../contact"} className="hover:text-[#ffbf92]">Contact</Link>
                 <span className="w-1 h-1 bg-white rounded-full"></span>
-                {user ? (
-                    <div className="flex items-center space-x-4">
-                        {user.image && (
-                            <img
-                                src={user.image}
-                                alt={user.name || "Profile Picture"}
-                                className="w-8 h-8 rounded-full"
-                            />
-                        )}
-                        <span>{user.name}</span>
-                        <button
-                            onClick={() => {
-                            Cookies.remove("authToken");
-                            window.location.reload();
-                        }}
-                            className="hover:text-[#ffbf92]"
-                        >Sign Out</button>
-                    </div>
-                ) : (
-                    <Link href={"/register"} className="hover:text-[#ffbf92]">{signInText}</Link>
+                {!loading && (
+                    user ? (
+                        <div className="flex items-center space-x-4">
+                            {
+                                user.image && (
+                                    <img
+                                        src={user.image}
+                                        alt={user.name}
+                                        className="w-8 h-8 rounded-full"
+                                    />
+                                )
+                            }
+                            <span>{user.name}</span>
+                            <button onClick={handleLogout} className="hover:text-[#ffbf92]">
+                                Sign Out
+                            </button>
+                        </div>
+                    ) : (
+                        <Link href={"../register"} className="hover:text-[#ffbf92]">Sign In</Link>
+                    )
                 )}
             </div>
         </nav>

@@ -16,24 +16,29 @@ export default function Auth({ type }) {
         }
     }, []);
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError("");
 
-        const response = await fetch("../../api/login", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-        });
+        try {
+            const response = await fetch("/api/login", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({email, password}),
+            });
 
-        const data = await response.json();
-        if (data.success) {
-            Cookies.set("authToken", data.token, { expires: 7 });
-            router.push("/social");
-        } else {
-            setError(data.message);
+            const data = await response.json();
+
+            if (data.success) {
+                Cookies.set("authToken", data.token, {expires: 7});
+                window.location.href = "/social";
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            setError("An error occurred during login");
         }
-    };
+    }
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
@@ -62,6 +67,10 @@ export default function Auth({ type }) {
                         type="submit"
                         className="w-full bg-[#66B539] hover:bg-[#6D4C41] text-white py-2 rounded font-semibold"
                     >Log In</button>
+                    <div className={"flex items-center justify-center flex-col"}>
+                        <span>test@example.com</span>
+                        <span>password12345</span>
+                    </div>
                 </form>
             </div>
         </div>

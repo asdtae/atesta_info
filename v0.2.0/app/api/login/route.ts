@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 import mysql from "mysql2/promise";
 
-const db = await mysql.createConnection({
+const db = await mysql.createPool({
     host: "localhost",
     user: "root",
     password: "",
     database: "cyclesphere",
 });
+
+//const JWT_SECRET = process.env.JWT_SECRET || "your_strong_secret_key_here";
 
 export async function POST(req: Request) {
     const { email, password } = await req.json();
@@ -22,7 +25,7 @@ export async function POST(req: Request) {
                     return NextResponse.json({ success: true, message: "Login successful!", token }, { status: 201 });
                 }
                 else {
-                    return NextResponse.json({essage: "Invalid email or password." }, { status: 401 });
+                    return NextResponse.json({ message: "Invalid email or password." }, { status: 401 });
                 }
             }
             else {
@@ -31,11 +34,4 @@ export async function POST(req: Request) {
         } catch (error) {
             return NextResponse.json({ success: false, message: "Invalid credentials." }, { status: 401 });
         }
-/*
-    if (email === "test@example.com" && password === "password123") {
-        const token =  email;
-        return NextResponse.json({ success: true, message: "Login successful!", token}, { status: 201 });
-    }
-*/
-    return NextResponse.json({message: "Invalid credentials." }, { status: 401 });
 }
