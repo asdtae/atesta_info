@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Quicksand } from 'next/font/google';
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
 
 const quicksand_600 = Quicksand({
     weight: ['600'],
@@ -22,6 +23,10 @@ export default function Navbar() {
     } | null>(null);
     const [loading, setLoading] = useState(true);
     const token = Cookies.get("authToken");
+    const router = useRouter()
+
+    var signInText = "Sign In";
+    if (token) { signInText = token; router.refresh() }
 
     useEffect(() => {
         if (token) {
@@ -77,7 +82,7 @@ export default function Navbar() {
                         >Sign Out</button>
                     </div>
                 ) : (
-                    <Link href={"/register"} className="hover:text-[#ffbf92]">{token}</Link>
+                    <Link href={"/register"} className="hover:text-[#ffbf92]">{signInText}</Link>
                 )}
             </div>
         </nav>
