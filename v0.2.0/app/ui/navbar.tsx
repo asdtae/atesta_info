@@ -41,7 +41,6 @@ export default function Navbar() {
                 });
 
             } catch (error) {
-                console.error("User fetch error:", error);
                 Cookies.remove("authToken");
                 setUser(null);
             } finally {

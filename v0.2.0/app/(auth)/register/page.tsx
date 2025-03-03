@@ -4,19 +4,19 @@ import {useEffect, useState} from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
-import {signIn} from "next-auth/react";
+import ProfileUpload from "./pfpUpload"
 
 export default function RegisterPage() {
     const router = useRouter();
+    const [user, setUser] = useState({ name: "", email: "", password: "" });
+    const [imageFile, setImageFile] = useState<File | null>(null);
+    const [error, setError] = useState("");
 
     useEffect(() => {
         if (Cookies.get("authToken")) {
             router.push("/social");
         }
     }, []);
-
-    const [user, setUser] = useState({ name: "", email: "", password: "" });
-    const [error, setError] = useState("");
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUser({ ...user, [e.target.name]: e.target.value });
@@ -26,16 +26,31 @@ export default function RegisterPage() {
         e.preventDefault();
         setError("");
 
-        const res = await fetch("../../api/register", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(user),
-        });
+        const formData = new FormData();
+        formData.append("name", user.name);
+        formData.append("email", user.email);
+        formData.append("password", user.password);
+        if (imageFile) {
+            formData.append("image", imageFile);
+        }
 
-        const data = await res.json();
-        if (!res.ok) return setError(data.message);
-        Cookies.set("authToken", data.token, { expires: 7 });
-        router.push("/social");
+        try {
+            const response = await fetch("/api/register", {
+                method: "POST",
+                body: formData,
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                Cookies.set("authToken", data.token, { expires: 7 });
+                window.location.href = "/social";
+            } else {
+                setError(data.message);
+            }
+        } catch (error) {
+            setError("An error occurred during registration");
+        }
     };
 
     return (
@@ -46,6 +61,10 @@ export default function RegisterPage() {
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
 
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="flex justify-center">
+                        <ProfileUpload onImageSelect={(file) => setImageFile(file)} />
+                    </div>
+
                     <input
                         type="text"
                         name="name"
@@ -83,7 +102,8 @@ export default function RegisterPage() {
                         Register
                     </button>
                     <div className="flex flex-row justify-evenly text-[#718693]">
-                        <p>Already have an account?</p><Link href={'/login'} className="text-white">Log In!</Link>
+                        <p>Already have an account?</p>
+                        <Link href={'/login'} className="text-white">Log In!</Link>
                     </div>
                 </form>
             </div>
