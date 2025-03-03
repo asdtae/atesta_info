@@ -23,23 +23,33 @@ export default function Navbar() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const token = Cookies.get("authToken");
+        const fetchUser = async () => {
+            const token = Cookies.get("authToken");
+            if (!token) { setLoading(false); return;}
 
-        if(token){
-            fetch('../api/me', {
-                headers: { Authorization: `Bearer ${token}` },
-            })
-                .then((res) => {
-                    if (!res.ok) throw new Error("Failed to fetch user");
-                    return res.json();
-                })
-                .then((data) => setUser(data.user))
-                .catch(() => setUser(null))
-                .finally(() => setLoading(false));
-        } else {
-            setUser(null);
-            setLoading(false);
-        }
+            try {
+                const response = await fetch("/api/me", {
+                    headers: { Authorization: `Bearer ${token}` },
+                });
+
+                if (!response.ok) new Error("Failed to fetch user");
+
+                const data = await response.json();
+                setUser({
+                    name: data.user.name,
+                    image: data.user.image
+                });
+
+            } catch (error) {
+                console.error("User fetch error:", error);
+                Cookies.remove("authToken");
+                setUser(null);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUser();
     }, []);
 
     const handleLogout = () => {

@@ -10,28 +10,45 @@ const db = await mysql.createPool({
     database: "cyclesphere",
 });
 
-//const JWT_SECRET = process.env.JWT_SECRET || "your_strong_secret_key_here";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 export async function POST(req: Request) {
     const { email, password } = await req.json();
 
-	try { 
-            const [existingUsers] = await db.execute("SELECT * FROM users WHERE email = ?", [email]);
-            if ((existingUsers as any[]).length > 0) {
-                const hashedPassword = await db.execute("SELECT * FROM users WHERE password = ?", [password]);
-                if((hashedPassword as any[]).length > 0) {
-                    //const token = await db.execute("SELECT * FROM users WHERE email = ? AND password = ?", [email, password]);
-                    const token = email;
-                    return NextResponse.json({ success: true, message: "Login successful!", token }, { status: 201 });
-                }
-                else {
-                    return NextResponse.json({ message: "Invalid email or password." }, { status: 401 });
-                }
-            }
-            else {
-                return NextResponse.json({ success: false, message: "Invalid email or password." }, { status: 401 });
-            }
-        } catch (error) {
+	try {
+        const [users] = await db.execute("SELECT id, name, email, password, pfp FROM users WHERE email = ?", [email]);
+        const userArray = users as any[];
+
+        if (userArray.length === 0) {
             return NextResponse.json({ success: false, message: "Invalid credentials." }, { status: 401 });
         }
+
+        const user = userArray[0];
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        console.log(password);
+        console.log(user.password);
+        console.log(bcrypt.compare(password, user.password));
+
+        if (!isPasswordValid) {
+            return NextResponse.json({ success: false, message: "Invalid credentials" }, { status: 401 });
+        }
+
+        const token = jwt.sign(
+            {
+                userId: user.id,
+                email: user.email,
+                name: user.name
+            }, JWT_SECRET, { expiresIn: "7d" }
+        );
+
+        return NextResponse.json({ success: true, message: "Login successful!", token,
+            user: {
+                id: user.id,
+                name: user.name,
+                image: user.pfp
+            }}, { status: 201 });
+
+    } catch (error) {
+        return NextResponse.json({ success: false, message: "Server error." }, { status: 500 });
+    }
 }

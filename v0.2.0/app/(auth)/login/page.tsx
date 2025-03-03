@@ -12,7 +12,7 @@ export default function Auth({ type }) {
 
     useEffect(() => {
         if (Cookies.get("authToken")) {
-            router.push("/social");
+            window.location.href = "/social";
         }
     }, []);
 
@@ -68,7 +68,7 @@ export default function Auth({ type }) {
                         className="w-full bg-[#66B539] hover:bg-[#6D4C41] text-white py-2 rounded font-semibold"
                     >Log In</button>
                     <div className={"flex items-center justify-center flex-col"}>
-                        <span>test@example.com</span>
+                        <span>test1@example.com</span>
                         <span>password12345</span>
                     </div>
                 </form>
