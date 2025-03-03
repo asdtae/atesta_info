@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Quicksand } from 'next/font/google';
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { useRouter } from 'next/navigation'
 
 const quicksand_600 = Quicksand({
     weight: ['600'],
@@ -21,13 +20,19 @@ export default function Navbar() {
         name: string;
         image?: string;
     } | null>(null);
+
     const [loading, setLoading] = useState(true);
     const token = Cookies.get("authToken");
-    const router = useRouter()
 
     var signInText = "Sign In";
-    if (token) { signInText = token; router.refresh() }
+    if (token) { signInText = token; }
 
+    useEffect(() => {
+        fetch('../api/me', {
+            headers: {}
+        })
+    }, []);
+    /*
     useEffect(() => {
         if (token) {
             fetch("../api/me", {
@@ -50,7 +55,7 @@ export default function Navbar() {
         } else {
             setLoading(false);
         }
-    }, []);
+    }, []);*/
 
     return (
         <nav className={`${quicksand_600.className} fixed top-0 left-0 w-full

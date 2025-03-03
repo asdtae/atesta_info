@@ -17,7 +17,8 @@ export async function POST(req: Request) {
             if ((existingUsers as any[]).length > 0) {
                 const hashedPassword = await db.execute("SELECT * FROM users WHERE password = ?", [password]);
                 if((hashedPassword as any[]).length > 0) {
-                    const token =  email;
+                    //const token = await db.execute("SELECT * FROM users WHERE email = ? AND password = ?", [email, password]);
+                    const token = email;
                     return NextResponse.json({ success: true, message: "Login successful!", token }, { status: 201 });
                 }
                 else {

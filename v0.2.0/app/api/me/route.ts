@@ -8,7 +8,7 @@ export async function GET(request: Request) {
     }
 
     const token = authHeader.split(" ")[1];
-    if (token === "valid-token") {
+    if (token === "test@example.com") {
         const user = {
             name: "John Doe",
             image: "",
