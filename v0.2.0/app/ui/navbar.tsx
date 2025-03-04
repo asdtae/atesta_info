@@ -114,37 +114,43 @@ export default function Navbar() {
                                      backdrop-composite border border-white/10 rounded-lg shadow-xl py-2">
                                     <Link
                                         href="../social"
-                                        className="block px-4 py-2 text-sm hover:bg-[#46515a]
-                                        transition-colors whitespace-nowrap"
-                                    >💬 Social</Link>
-                                    <div className="px-4 py-2 text-sm hover:bg-[#46515a]
-                                         transition-colors cursor-pointer"
-                                    >🎨 Appearance
-                                        <div className="ml-2 mt-1 space-y-1">
+                                        className="flex items-center px-4 py-2 text-sm hover:bg-white/10 transition-colors"
+                                    >
+                                        <span className="w-6">💬</span>
+                                        <span className="ml-2">Social</span>
+                                    </Link>
+                                    <div className="px-4 py-2 text-sm hover:bg-white/10 transition-colors cursor-pointer">
+                                        <div className="flex items-center">
+                                            <span className="w-6">🎨</span>
+                                            <span className="ml-2">Appearance</span>
+                                        </div>
+                                        <div className="ml-8 mt-1 space-y-1">
                                             <div
                                                 onClick={toggleDarkMode}
-                                                className="flex items-center
-                                                hover:bg-[#46515a] px-2 py-1 rounded
-                                                whitespace-nowrap">
-                                                <span className="mr-2">🌓</span>
-                                                {darkMode ? 'Dark' : 'Light'} Mode
+                                                className="flex items-center hover:bg-white/10 px-2 py-1 rounded"
+                                            >
+                                                <span className="w-6">🌓</span>
+                                                <span className="ml-2">{darkMode ? 'Dark' : 'Light'} Mode</span>
                                             </div>
                                         </div>
                                     </div>
                                     <Link
                                         href="../settings"
-                                        className="block px-4 py-2 text-sm hover:bg-[#46515a]
-                                        transition-colors whitespace-nowrap"
-                                    >⚙ Settings</Link>
+                                        className="flex items-center px-4 py-2 text-sm hover:bg-white/10 transition-colors"
+                                    >
+                                        <span className="w-6 pl-1">⚙</span>
+                                        <span className="ml-2">Settings</span>
+                                    </Link>
                                     <button
                                         onClick={handleLogout}
-                                        className="w-full text-left px-4
-                                        py-2 text-sm hover:bg-[#46515a]
-                                        hover:text-[#FF477B] transition-colors
-                                        whitespace-nowrap"
-                                    >👋 Sign Out</button>
+                                        className="w-full flex items-center px-4 py-2 text-sm
+                                        hover:bg-white/10 transition-colors hover:text-[#FF477B]"
+                                    >
+                                        <span className="w-6 pr-1">👋</span>
+                                        <span className="ml-2">Sign Out</span>
+                                    </button>
                                 </div>
-                                // TODO: teszt szerint legyen justifyolva ne emoji szerint + a social linket ki lehet hozni a pfp melle
+                                // TODO: text szerint legyen justifyolva ne emoji szerint + a social linket ki lehet hozni a pfp melle
                             )}
                         </div>
                     ) : (

@@ -46,7 +46,7 @@ export default function ProfileUpload({ onImageSelect  }) {
                 <img
                     src={"resources/camera.png"}
                     alt="Profile small camera"
-                    className="w-6 h-6 text-white"
+                    className="w-6 h-6"
                 />
             </div>
         </div>
