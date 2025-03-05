@@ -150,7 +150,7 @@ export default function Navbar() {
                                         <span className="ml-2">Sign Out</span>
                                     </button>
                                 </div>
-                                // TODO: text szerint legyen justifyolva ne emoji szerint + a social linket ki lehet hozni a pfp melle
+                                // TODO: maybe a social linket ki lehet hozni a pfp melle
                             )}
                         </div>
                     ) : (

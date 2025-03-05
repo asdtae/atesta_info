@@ -45,7 +45,7 @@ export default function Contact() {
 
     return (
         <div className={`${varela_round.className} min-h-screen flex bg-gradient-to-br
-             from-indigo-900 via-purple-800 to-pink-700 text-white relative overflow-hidden`}>
+                 from-[#00A878]  to-[#A57548] text-white relative overflow-hidden`}>
             <div className="flex flex-row items-center justify-evenly text-center flex-grow px-6">
                 <div className="flex flex-col items-center text-center">
                     <h1 className={`${quicksand.className} text-5xl font-bold`}>Contact Us</h1>
