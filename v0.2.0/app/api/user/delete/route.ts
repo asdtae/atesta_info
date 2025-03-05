@@ -14,7 +14,7 @@ export async function DELETE(req: Request) {
         const user = await getCurrentUser();
         if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-        await db.execute("DELETE FROM users WHERE id = ?", [user.id]);
+        await db.execute("DELETE FROM `users` WHERE id = ?", [user.id]);
 
         return NextResponse.json({ success: true });
 

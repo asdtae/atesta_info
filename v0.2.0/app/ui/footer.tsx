@@ -7,6 +7,7 @@ export default function Footer() {
             <div className="flex justify-center space-x-4 mt-2">
                 <Link href="/legal/privacy-policy.html" className="hover:opacity-100 opacity-70">Privacy Policy</Link>
                 <Link href="/legal/tos.html" className="hover:opacity-100 opacity-70">Terms of Service</Link>
+                <Link href="/docs" className="hover:opacity-100 opacity-70">Docs</Link>
             </div>
         </footer>
     );

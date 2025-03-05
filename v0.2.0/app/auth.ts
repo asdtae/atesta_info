@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 
 export const getCurrentUser = async () => {
-    const token = await cookies().get('authToken')?.value;
+    const token = (await cookies()).get('authToken')?.value;
     if (!token) return null;
 
     try {
