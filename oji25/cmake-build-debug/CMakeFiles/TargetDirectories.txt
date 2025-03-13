@@ -1,0 +1,3 @@
+D:/Mystuff/Dolgok/Programming/C++/CLion/oji25/cmake-build-debug/CMakeFiles/oji25.dir
+D:/Mystuff/Dolgok/Programming/C++/CLion/oji25/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Mystuff/Dolgok/Programming/C++/CLion/oji25/cmake-build-debug/CMakeFiles/rebuild_cache.dir
