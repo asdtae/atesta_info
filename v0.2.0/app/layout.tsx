@@ -6,7 +6,7 @@ import { SessionClient } from "./sessionclient.tsx";
 
 export const metadata = {
     title: 'Cyclesphere',
-    description: 'Your cycling community platform',
+    description: 'Your recycling community platform',
     icons: {
         icon: '/favicon.ico',
     },

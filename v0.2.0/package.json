@@ -6,22 +6,25 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "social-server": "node social-server.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.7",
     "framer-motion": "^12.4.10",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
-    "mysql2": "^3.12.0",
+    "mysql2": "^3.13.0",
     "next": "15.1.6",
     "next-auth": "^4.24.11",
     "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
-    "tailwind-merge": "^3.0.2"
+    "tailwind-merge": "^3.0.2",
+    "ws": "^8.18.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
