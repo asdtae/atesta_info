@@ -29,7 +29,7 @@ export async function POST(req: Request) {
             await writeFile(path.join(uploadPath, filename), buffer);
             updates.pfp = `/uploads/${filename}`;
 
-            console.log(`File saved to ${path.join(uploadPath, filename)}`);
+            //console.log(`File saved to ${path.join(uploadPath, filename)}`);
         }
 
         const name = formData.get("name");
@@ -39,6 +39,15 @@ export async function POST(req: Request) {
                 return NextResponse.json({ errors: validation.errors }, { status: 400 });
             }
             updates.name = name.toString();
+        }
+
+        const email = formData.get("email");
+        if (email) {
+            const validation = validateUserUpdate(email);
+            if (!validation.valid) {
+                return NextResponse.json({ errors: validation.errors }, { status: 400 });
+            }
+            updates.email = email.toString();
         }
 
         const bio = formData.get('bio');
