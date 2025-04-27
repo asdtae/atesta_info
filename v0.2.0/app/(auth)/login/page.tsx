@@ -1,11 +1,10 @@
 "use client"
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
-export default function Auth({ type }) {
-    const router = useRouter();
+export default function Auth({}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -67,6 +66,10 @@ export default function Auth({ type }) {
                         type="submit"
                         className="w-full bg-[#66B539] hover:bg-[#6D4C41] text-white py-2 rounded font-semibold"
                     >Log In</button>
+                    <div className="flex flex-row justify-evenly text-[#718693]">
+                        <p>Don't have an account yet?</p>
+                        <Link href={'/register'} className="text-white">Register!</Link>
+                    </div>
                     <div className={"flex items-center justify-center flex-col"}>
                         <span>test1@example.com</span>
                         <span>password12345</span>

@@ -20,7 +20,7 @@ export async function GET(req: NextRequest) {
 
     try {
         const decoded = jwt.verify(token, JWT_SECRET) as any;
-        const [users] = await db.execute("SELECT id, name, email, pfp FROM users WHERE id = ?", [decoded.userId]);
+        const [users] = await db.execute("SELECT id, name, email, pfp FROM users WHERE id = ?", [decoded.id]);
 
         const userArray = users as any[];
 
@@ -35,7 +35,9 @@ export async function GET(req: NextRequest) {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                image: user.pfp
+                bio: user.bio,
+                image: user.pfp,
+                twoFactorEnabled: user.two_factor_enabled
             }
         });
 

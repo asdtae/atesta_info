@@ -115,7 +115,7 @@ export default function SettingsPage() {
                     email: data.user.email,
                     bio: data.user.bio || '',
                     image: data.user.image || '/default-avatar.jpg',
-                    twoFactorEnabled: data.user.two_factor_enabled || false
+                    twoFactorEnabled: data.user.twoFactorEnabled || false
                 });
 
             } catch (error) {
@@ -137,7 +137,7 @@ export default function SettingsPage() {
             const formData = new FormData();
 
             if (value instanceof File) {
-                formData.append('avatar', value);
+                formData.append('image', value);
             } else {
                 formData.append(field, value);
             }
@@ -159,6 +159,7 @@ export default function SettingsPage() {
             }));
 
             addMessage('success', 'Changes saved successfully');
+            window.location.reload();
         } catch (error) {
             addMessage('error', error instanceof Error ? error.message : 'Update failed');
         } finally {
@@ -225,9 +226,10 @@ export default function SettingsPage() {
             });
 
             if (!response.ok) new Error('Deletion failed');
-
-            Cookies.remove('authToken');
-            window.location.href = '/';
+            else {
+                Cookies.remove('authToken');
+                window.location.href = '/';
+            }
         } catch (error) {
             addMessage('error', 'Account deletion failed');
         }
@@ -368,7 +370,7 @@ export default function SettingsPage() {
                         <SettingsSection title="Profile">
                             <div className="flex items-center space-x-6 mb-6">
                                 <ProfileUpload
-                                    currentImage={userData?.image || '/default-avatar.jpg'}
+                                    currentImage={userData?.image || 'resources/default-avatar.jpg'}
                                     onImageSelect={(file) => handleSaveField('image', file)}
                                     isLoading={isUpdating}
                                 />
@@ -398,8 +400,31 @@ export default function SettingsPage() {
                             <div className="space-y-2">
                                 <label className="block text-sm font-medium text-gray-300">BIO</label>
                                 <textarea
-                                    value={userData?.bio}
-                                    onChange={(e) => setUserData({...userData, bio: e.target.value})}
+                                    value={userData?.bio || ''}
+                                    onChange={(e) => setUserData(userData ? {...userData, bio: e.target.value} : null)}
+                                    onKeyDown={async (e) => {
+                                        if (e.key === 'Enter' && userData) {
+                                            e.preventDefault();
+                                            try {
+                                                const response = await fetch('/api/user/update', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                        'Authorization': `Bearer ${Cookies.get('authToken')}`
+                                                    },
+                                                    body: JSON.stringify({
+                                                        bio: userData.bio
+                                                    })
+                                                });
+
+                                                if (!response.ok) throw new Error('Failed to save bio');
+
+                                                addMessage('success', 'Bio updated successfully');
+                                            } catch (error) {
+                                                addMessage('error', error instanceof Error ? error.message : 'Failed to update bio');
+                                            }
+                                        }
+                                    }}
                                     className="w-full bg-gray-800 rounded p-3 text-gray-100
                                     focus:outline-none focus:ring-2 focus:ring-[#66B539]"
                                     rows={3}

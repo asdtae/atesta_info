@@ -41,7 +41,7 @@ export default function HomePage() {
                                     Eco-Friendly Tracking
                                 </h3>
                             </div>
-                            <p className="text-gray-600">Monitor your carbon offset and contribute to real environmental impact metrics</p>
+                            <p className="text-gray-600">Track your recycling efforts and see the real-world environmental impact you’re making</p>
                         </div>
                         <div className="grid md:grid-rows-2 gap-1">
                             <div className="flex flex-row-reverse gap-4">
@@ -52,7 +52,7 @@ export default function HomePage() {
                                     Community Challenges
                                 </h3>
                             </div>
-                            <p className="flex flex-row-reverse text-gray-600">Join group rides and sustainability challenges with fellow cyclists</p>
+                            <p className="flex flex-row-reverse text-gray-600">Team up with other recyclers and take on sustainability challenges together</p>
                         </div>
                         <div className="grid md:grid-rows-2 gap-1">
                             <div className="flex gap-4">
@@ -63,7 +63,7 @@ export default function HomePage() {
                                     Smart Analytics
                                 </h3>
                             </div>
-                            <p className="text-gray-600">Get detailed insights into your riding patterns and environmental impact</p>
+                            <p className="text-gray-600">Get detailed insights into your recycling habits and the positive change you're creating</p>
                         </div>
                     </div>
                 </div>
@@ -71,10 +71,10 @@ export default function HomePage() {
                 <div className="relative  py-20">
                     <div className="max-w-4xl mx-auto px-4 text-center">
                         <h2 className={`${quicksand_700.className} text-4xl text-white mb-8`}>
-                            Ready to Pedal Towards Change?
+                            Ready to Turn Waste into Positive Change?
                         </h2>
                         <p className="text-xl text-white/90 mb-12">
-                            Join our community of 50,000+ cyclists making a difference in cities worldwide.
+                            Join our community of 50,000+ recyclers making a difference in cities worldwide.
                         </p>
                         <div className="flex flex-col md:flex-row gap-4 justify-center">
                             <Link href="./register">

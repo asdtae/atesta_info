@@ -7,6 +7,9 @@ export const getCurrentUser = async () => {
 
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET!);
+
+        //console.log(decoded as { id: string; email: string; name: string });
+
         return decoded as { id: string; email: string; name: string };
     } catch (error) {
         return null;
