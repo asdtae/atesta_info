@@ -2,7 +2,7 @@ import { Quicksand } from 'next/font/google';
 import { Varela_Round } from "next/font/google";
 import PostEditor from "@/app/social/editor/postEditor";
 import Post from "@/app/social/posts/post";
-import Sidebar from "@/app/social/sidebar/sidebar";
+//import Sidebar from "@/app/social/sidebar/sidebar";
 
 const quicksand = Quicksand({
     weight: ['400'],
@@ -35,7 +35,7 @@ export default async function Social() {
                         ))}
                     </div>
                 </div>
-                <Sidebar />
+                {/* <Sidebar /> */}
             </div>
         </div>
     )

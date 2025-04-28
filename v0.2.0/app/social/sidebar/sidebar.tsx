@@ -1,4 +1,4 @@
-import {Suspense} from "preact/compat";
+/*import {Suspense} from "preact/compat";
 import {Loader2} from "lucide-react";
 import {unstable_cache} from "next/cache";
 import Link from "next/link";

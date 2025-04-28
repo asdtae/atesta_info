@@ -23,7 +23,7 @@ function relativeDate(from: Date) {
 
 export default function Post({ post }: PostProps) {
     return (
-        <dir className={`flex flex-col items-center justify-center`}>
+        <div className={`flex flex-col items-center justify-center`}>
             <article className="space-y-3 rounded-2xl p-5 bg-white rounded-lg shadow-md mb-6 w-[36rem]">
                 <div className="flex flex-wrap gap-3 items-center mb-2">
                     <Link href={`/users/${post.name}`}>
@@ -46,6 +46,6 @@ export default function Post({ post }: PostProps) {
                 </div>
                 <p className={`whitespace-pre-line break-words`}>{post.content}</p>
             </article>
-        </dir>
+        </div>
     );
 }

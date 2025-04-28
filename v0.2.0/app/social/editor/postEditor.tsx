@@ -75,6 +75,7 @@ export default function PostEditor() {
             if (!response.ok) new Error("Failed to send post");
 
             editor?.commands.clearContent();
+            window.location.reload();
         } catch (error) {
             console.error("Error sending post:", error);
         }
