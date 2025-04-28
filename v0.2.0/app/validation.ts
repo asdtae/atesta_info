@@ -36,3 +36,16 @@ export const validatePasswordChange = (password: string) => {
         errors
     };
 };
+
+export const validatePostContent = (content: string) => {
+    const errors: string[] = [];
+
+    if (content.length < 3) {
+        errors.push("Content must be at least 3 characters");
+    }
+
+    return {
+        valid: errors.length === 0,
+        errors
+    };
+}

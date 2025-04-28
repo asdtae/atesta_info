@@ -10,12 +10,18 @@
     "social-server": "node social-server.js"
   },
   "dependencies": {
+    "@tiptap/extension-placeholder": "^2.11.7",
+    "@tiptap/pm": "^2.11.7",
+    "@tiptap/react": "^2.11.7",
+    "@tiptap/starter-kit": "^2.11.7",
     "bcryptjs": "^3.0.2",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.7",
     "framer-motion": "^12.4.10",
     "js-cookie": "^3.0.5",
     "jsonwebtoken": "^9.0.2",
+    "lucide-react": "^0.503.0",
     "mysql2": "^3.13.0",
     "next": "^15.3.1",
     "next-auth": "^4.24.11",
