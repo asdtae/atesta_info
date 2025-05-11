@@ -2,7 +2,7 @@ import { Quicksand } from 'next/font/google';
 import { Varela_Round } from "next/font/google";
 import PostEditor from "@/app/social/editor/postEditor";
 import Post from "@/app/social/posts/post";
-//import Sidebar from "@/app/social/sidebar/sidebar";
+import Sidebar from "@/app/social/sidebar/sidebar";
 
 const quicksand = Quicksand({
     weight: ['400'],
@@ -18,8 +18,15 @@ const varela_round = Varela_Round({
 
 export default async function Social() {
     const baseUrl = 'http://localhost:3000';
-    const data = await fetch(`${baseUrl}/api/chat/getPosts`).then(res => res.json());
-    const posts = Array.isArray(data.posts) ? data.posts : [];
+    let posts = [];
+
+    try {
+        const response = await fetch(`${baseUrl}/api/chat/getPosts`);
+        const data = await response.json();
+        posts = Array.isArray(data.posts) ? data.posts : [];
+    } catch (error) {
+        console.error("Error fetching posts:", error);
+    }
 
     return (
         <div className={`${quicksand.className} min-h-screen
@@ -35,7 +42,7 @@ export default async function Social() {
                         ))}
                     </div>
                 </div>
-                {/* <Sidebar /> */}
+                 <Sidebar />
             </div>
         </div>
     )
